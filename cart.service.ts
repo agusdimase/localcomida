@@ -19,6 +19,7 @@ export class CartService {
 
   }
 
+
   agregarAlCarrito(producto:Producto,cantidad:number){
 
     const index= this.carrito.findIndex(item => item.producto.nombre === producto.nombre);
@@ -60,10 +61,9 @@ export class CartService {
   }
 
   calcularTotal(){
-    let subtotal = 0;
+    this.totalCarrito = 0;
     this.carrito.forEach(item => {
-      subtotal = subtotal+item.producto.precio
+       this.totalCarrito = this.totalCarrito + item.producto.precio * item.cantidad;
     })
-    this.totalCarrito = subtotal;
   }
 }
