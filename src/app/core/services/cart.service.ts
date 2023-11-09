@@ -19,9 +19,10 @@ export class CartService {
 
   }
 
+
   agregarAlCarrito(producto:Producto,cantidad:number){
 
-    const index= this.carrito.findIndex(item => item.producto.nombre === producto.nombre);
+    const index= this.carrito.findIndex(item => item.producto.nombre === producto.nombre)
     if (index === -1){
       const productoActual:ProductoCarrito = {
         cantidad: cantidad,
@@ -31,11 +32,8 @@ export class CartService {
     } else{ 
       this.carrito[index].cantidad = this.carrito[index].cantidad + cantidad;
     }
-    const productoActual:ProductoCarrito = {
-      cantidad: cantidad,
-      producto: producto
-    }
-    this.carrito.push(productoActual);
+    
+
     console.log(this.carrito)
     this.guardarLocalStorage()
     this.calcularTotal()
@@ -63,10 +61,9 @@ export class CartService {
   }
 
   calcularTotal(){
-    let subtotal = 0;
+    this.totalCarrito = 0;
     this.carrito.forEach(item => {
-      subtotal = subtotal+item.producto.precio
+       this.totalCarrito = this.totalCarrito + item.producto.precio * item.cantidad;
     })
-    this.totalCarrito = subtotal;
   }
 }
